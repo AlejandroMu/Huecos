@@ -17,51 +17,62 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/login_email_et"
-            android:hint="@string/email_hint"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
+            android:textSize="20sp"
             android:background="@drawable/round_edge"
-            android:textSize="25sp"
+            android:hint="@string/name_hint"
             android:padding="10dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp"/>
+            android:layout_margin="15dp"
+            android:id="@+id/signup_name_et"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/login_password_et"
-            android:hint="@string/password_hint"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
+            android:textSize="20sp"
             android:background="@drawable/round_edge"
-            android:textSize="25sp"
+            android:hint="@string/user_hint"
             android:padding="10dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp"/>
-        <TextView
+            android:layout_margin="15dp"
+            android:id="@+id/signup_user_et"/>
+        <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/signup_text"
-            android:textAlignment="textEnd"
-            android:layout_marginRight="15dp"
-            android:textSize="25sp"
-            android:id="@+id/login_register_tv"
-            android:layout_marginBottom="15dp"
-            android:textColor="#FFF"/>
+            android:textSize="20sp"
+            android:background="@drawable/round_edge"
+            android:hint="@string/email_hint"
+            android:padding="10dp"
+            android:layout_margin="15dp"
+            android:id="@+id/signup_email_et"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:background="@drawable/round_edge"
+            android:hint="@string/password_hint"
+            android:padding="10dp"
+            android:layout_margin="15dp"
+            android:id="@+id/signup_password_et"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:background="@drawable/round_edge"
+            android:hint="@string/repassword_hint"
+            android:padding="10dp"
+            android:layout_margin="15dp"
+            android:id="@+id/signup_repassword_et"/>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/login_text"
+                android:text="@string/signup_text"
                 android:layout_centerHorizontal="true"
                 android:background="@drawable/round_edge_button"
                 android:textSize="25sp"
                 android:padding="10dp"
                 android:layout_marginTop="20dp"
                 android:textColor="@color/colorPrimary"
-                android:id="@+id/login_login_btn"/>
+                android:id="@+id/signup_signup_btn"/>
         </RelativeLayout>
     </LinearLayout>
 </RelativeLayout>
