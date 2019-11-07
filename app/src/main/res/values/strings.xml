@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">HuecosColombia</string>
     <string name="title_activity_maps">Map</string>
+    <string name="email_hint">Correo electrónico</string>
+    <string name="password_hint">Contraseña</string>
+    <string name="signup_text">Registrarse</string>
+    <string name="login_text">Ingresar</string>
+    <string name="repassword_hint">Confirmar contraseña</string>
+    <string name="name_hint">Nombre</string>
+    <string name="user_hint">Usuario</string>
 </resources>
