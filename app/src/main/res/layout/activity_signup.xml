@@ -2,7 +2,7 @@
 <RelativeLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@drawable/backgroundLogin">
+    android:background="@drawable/background_login">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,7 +22,8 @@
             android:hint="@string/name_hint"
             android:padding="10dp"
             android:layout_margin="15dp"
-            android:id="@+id/signup_name_et"/>
+            android:id="@+id/signup_name_et"
+            android:textColorHint="#757575"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -31,7 +32,8 @@
             android:hint="@string/user_hint"
             android:padding="10dp"
             android:layout_margin="15dp"
-            android:id="@+id/signup_user_et"/>
+            android:id="@+id/signup_user_et"
+            android:textColorHint="#757575"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -40,7 +42,8 @@
             android:hint="@string/email_hint"
             android:padding="10dp"
             android:layout_margin="15dp"
-            android:id="@+id/signup_email_et"/>
+            android:id="@+id/signup_email_et"
+            android:textColorHint="#757575"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -49,7 +52,8 @@
             android:hint="@string/password_hint"
             android:padding="10dp"
             android:layout_margin="15dp"
-            android:id="@+id/signup_password_et"/>
+            android:id="@+id/signup_password_et"
+            android:textColorHint="#757575"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -58,7 +62,8 @@
             android:hint="@string/repassword_hint"
             android:padding="10dp"
             android:layout_margin="15dp"
-            android:id="@+id/signup_repassword_et"/>
+            android:id="@+id/signup_repassword_et"
+            android:textColorHint="#757575"/>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">

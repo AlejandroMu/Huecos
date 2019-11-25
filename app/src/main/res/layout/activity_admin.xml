@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:id="@+id/take_photo_container_ll"
+        android:id="@+id/admin_container_ll"
         android:background="@color/colorPrimary"
         android:layout_marginBottom="70dp">
 
@@ -21,31 +21,31 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="70dp"
-            android:background="@color/colorAccent"
+            android:background="@color/colorPrimary"
             android:gravity="center"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:id="@+id/take_photo_profile_ll">
+            android:id="@+id/admin_pictures_ll">
             <ImageButton
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:id="@+id/take_photo_profile"
-                android:background="@drawable/user_primary"/>
+                android:id="@+id/admin_pictures_btn"
+                android:background="@drawable/pictures_acent"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="70dp"
-            android:background="@color/colorPrimary"
+            android:background="@color/colorAccent"
             android:gravity="center"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:id="@+id/take_photo_photo_ll">
+            android:id="@+id/admin_list_ll">
             <ImageButton
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:id="@+id/take_photo_photo"
-                android:background="@drawable/camera_acent"/>
+                android:id="@+id/admin_list_btn"
+                android:background="@drawable/list_primary"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
@@ -54,12 +54,12 @@
             android:gravity="center"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:id="@+id/take_photo_news_ll">
+            android:id="@+id/admin_list_users_ll">
             <ImageButton
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:id="@+id/take_photo_news"
-                android:background="@drawable/newspaper_primary"/>
+                android:id="@+id/admin_list_users_btn"
+                android:background="@drawable/list_users_primary"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
@@ -68,12 +68,12 @@
             android:gravity="center"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:id="@+id/take_photo_info_ll">
+            android:id="@+id/admin_messages_ll">
             <ImageButton
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:id="@+id/take_photo_info"
-                android:background="@drawable/info_primary" />
+                android:id="@+id/admin_messages_btn"
+                android:background="@drawable/messages_primary" />
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>
