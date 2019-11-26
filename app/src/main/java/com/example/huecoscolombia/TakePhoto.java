@@ -150,6 +150,12 @@ public class TakePhoto extends AppCompatActivity implements View.OnClickListener
         ft.replace(R.id.take_photo_container_ll, publishPhotoFragment);
         ft.commit();
     }
+    public void showNews(){
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction ft = manager.beginTransaction();
+        ft.replace(R.id.take_photo_container_ll, newsFragment);
+        ft.commit();
+    }
 
     public void backPublishPhoto(){
         FragmentManager manager = getSupportFragmentManager();

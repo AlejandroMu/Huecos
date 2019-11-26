@@ -52,12 +52,12 @@ public class Signup extends AppCompatActivity {
                         User us=new User();
                         us.setPassword(password);
                         us.setUsername(username);
-                        db.getReference().child("users").child(username).setValue(us);
+                        db.getReference().child(User.BRANCH).child(user.replace(".","_")).setValue(us);
                         Person person=new Person();
                         person.setEmail(user);
                         person.setName(name);
                         person.setUsername(username);
-                        db.getReference().child("persons").child(user).setValue(person);
+                        db.getReference().child(Person.BRANCH).child(user.replace(".","_")).setValue(person);
                         startActivity(new Intent(this, TakePhoto.class));
 
                     }

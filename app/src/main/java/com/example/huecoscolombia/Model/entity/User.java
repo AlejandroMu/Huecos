@@ -9,6 +9,8 @@ import java.util.List;
 
 @Table(name = "USER")
 public class User {
+    public static final String BRANCH="users";
+
 
     @Id(name = "username")
     private String username;
