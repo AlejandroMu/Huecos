@@ -2,6 +2,9 @@
 <RelativeLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -35,6 +38,7 @@
             android:padding="10dp"
             android:layout_margin="15dp"
             android:hint="@string/direction"
+            android:textColor="#757575"
             android:textColorHint="#757575"
             android:id="@+id/publish_photo_direction_et"/>
         <TextView
@@ -49,6 +53,7 @@
             android:background="@drawable/round_edge"
             android:textSize="25sp"
             android:padding="10dp"
+            android:textColor="#757575"
             android:layout_margin="15dp"
             android:hint="@string/description"
             android:textColorHint="#757575"
@@ -72,4 +77,5 @@
         android:background="@drawable/back_arrow"
         android:layout_margin="10dp"
         android:id="@+id/publish_photo_back_btn"/>
+    </ScrollView>
 </RelativeLayout>
