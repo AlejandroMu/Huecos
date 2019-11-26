@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "615219709307",
+    "firebase_url": "https://huecos-colombia-114c0.firebaseio.com",
+    "project_id": "huecos-colombia-114c0",
+    "storage_bucket": "huecos-colombia-114c0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:615219709307:android:057eda17725f2c8ee069de",
+        "android_client_info": {
+          "package_name": "com.example.huecoscolombia192"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "615219709307-nj44nabq49k8cpe0ke4a8k3e3lssedm4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.huecoscolombia192",
+            "certificate_hash": "5ed96276ce8ffabfda227738e746c303705f5f98"
+          }
+        },
+        {
+          "client_id": "615219709307-iekaqabd92dr2uj5vi5tci3vq54idbfk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAuER1JrScRevU9GmqAvoeyNYpJIzIFSCE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "615219709307-iekaqabd92dr2uj5vi5tci3vq54idbfk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
