@@ -6,6 +6,8 @@ import com.example.huecoscolombia.Model.driver.Table;
 
 @Table(name = "PERSON")
 public class Person {
+    public static final String BRANCH="persons";
+
 
     @Id
     private String email;

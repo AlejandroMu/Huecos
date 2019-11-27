@@ -39,9 +39,8 @@ public class TakePhotoFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CAMERA_CALLBACK_ID && resultCode == Activity.RESULT_OK) {
-            Bitmap imagen = BitmapFactory.decodeFile(photoFile.toString());
             if(listener!=null) {
-                listener.onTakedPhoto(imagen);
+                listener.onTakedPhoto(photoFile);
             }
             ((TakePhoto)getActivity()).publishPhoto();
         }
@@ -54,9 +53,8 @@ public class TakePhotoFragment extends Fragment {
             //5...
             File dest = new File(HuecosColombiaApp.getContext().getExternalFilesDir(null) + "/" + id + ".png");
             UtilDomi.copyFileUsingStream(photoFile, dest);
-            Bitmap imagen = BitmapFactory.decodeFile(dest.toString());
             if(listener!=null) {
-                listener.onTakedPhoto(imagen);
+                listener.onTakedPhoto(dest);
             }
             ((TakePhoto)getActivity()).publishPhoto();
             //5...
@@ -101,7 +99,7 @@ public class TakePhotoFragment extends Fragment {
     }
 
     public interface OnTakedPhoto {
-        void onTakedPhoto(Bitmap image);
+        void onTakedPhoto(File image);
     }
 
     private OnTakedPhoto listener;

@@ -8,6 +8,12 @@ import java.util.Date;
 
 public class Publication {
 
+    public static final String BRANCH="publications";
+    public static final String IN_PROGRESS="IN_PROGRESS";
+    public static final String TO_DO="TO_DO";
+    public static final String DONE="DONE";
+
+
     @Id
     private String id;
 
@@ -15,8 +21,81 @@ public class Publication {
     private String pathImage;
     private String location;
     private String description;
-    private Date date;
-    private State state;
+    private long date;
+    private String state;
     private int likes;
 
+    public Publication(String id,String pathImage, String location, String description, long date, String state, int likes) {
+        this.id = id;
+        this.pathImage = pathImage;
+        this.location = location;
+        this.description = description;
+        this.date = date;
+        this.state = state;
+        this.likes = likes;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Bitmap getImage() {
+        return image;
+    }
+
+    public void setImage(Bitmap image) {
+        this.image = image;
+    }
+
+    public String getPathImage() {
+        return pathImage;
+    }
+
+    public void setPathImage(String pathImage) {
+        this.pathImage = pathImage;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public long getDate() {
+        return date;
+    }
+
+    public void setDate(long date) {
+        this.date = date;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public int getLikes() {
+        return likes;
+    }
+
+    public void setLikes(int likes) {
+        this.likes = likes;
+    }
 }
