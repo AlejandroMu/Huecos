@@ -16,9 +16,7 @@ public class User {
     private String username;
     @Colum(name = "password")
     private String password;
-    @Foreign(name = "person",reference = "cc")
-    private Person person;
-    @Foreign(name = "state",reference = "id")
+    private String email;
     private String state;
     private List<Role> roles;
 
@@ -38,12 +36,12 @@ public class User {
         this.password = password;
     }
 
-    public Person getPerson() {
-        return person;
+    public String getPerson() {
+        return email;
     }
 
-    public void setPerson(Person person) {
-        this.person = person;
+    public void setPerson(String email) {
+        this.email = email;
     }
 
     public String getState() {

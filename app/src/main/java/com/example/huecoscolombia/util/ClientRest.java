@@ -9,6 +9,10 @@ import java.net.URLConnection;
 
 public class ClientRest {
 
+    public void getPubications(){
+
+    }
+
     private void getImage(String urlI,ResponseImage res){
         new Thread(()->{
         if(urlI!=null){

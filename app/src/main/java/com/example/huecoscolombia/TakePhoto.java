@@ -154,6 +154,7 @@ public class TakePhoto extends AppCompatActivity implements View.OnClickListener
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction ft = manager.beginTransaction();
         ft.replace(R.id.take_photo_container_ll, newsFragment);
+        changeColor(newsLl);
         ft.commit();
     }
 

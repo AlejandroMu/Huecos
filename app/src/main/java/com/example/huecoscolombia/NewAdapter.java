@@ -10,18 +10,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.huecoscolombia.Model.entity.Publication;
-import com.example.huecoscolombia.Model.entity.PublicationImage;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
-import java.util.List;
 
 public class NewAdapter extends BaseAdapter {
 
     public static int PAGE=1;
 
-    private LinkedList<PublicationImage> news;
+    private LinkedList<Publication> news;
 
     public NewAdapter () {
         news = new LinkedList<>();
@@ -33,7 +30,7 @@ public class NewAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int i) {
+    public Publication getItem(int i) {
         return news.get(i);
     }
 
@@ -52,17 +49,17 @@ public class NewAdapter extends BaseAdapter {
         TextView numLike = v.findViewById(R.id.row_new_num_like_tv);
         TextView date = v.findViewById(R.id.row_new_date_tv);
         TextView description = v.findViewById(R.id.row_new_description_tv);
-        PublicationImage object=news.get(i);
+        Publication object=news.get(i);
         picture.setImageBitmap(object.getImage());
-        numLike.setText(object.getPublication().getLikes()+"");
-        date.setText((new Date(object.getPublication().getDate())).toString());
-        description.setText(object.getPublication().getDescription());
+        numLike.setText(object.getLikes()+"");
+        date.setText((new Date(object.getDate())).toString());
+        description.setText(object.getDescription());
         return v;
     }
-    public void setList(LinkedList<PublicationImage> images){
+    public void setList(LinkedList<Publication> images){
         news=images;
     }
-    public void addElement(PublicationImage image){
+    public void addElement(Publication image){
         if(news.size()>30){
             news.pop();
         }
