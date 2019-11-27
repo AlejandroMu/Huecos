@@ -9,6 +9,7 @@ import java.util.Date;
 public class Publication {
 
     public static final String BRANCH="publications";
+
     public static final String IN_PROGRESS="IN_PROGRESS";
     public static final String TO_DO="TO_DO";
     public static final String DONE="DONE";

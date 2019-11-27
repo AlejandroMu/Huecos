@@ -10,6 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.example.huecoscolombia.Model.entity.PublicationImage;
+
+import java.util.LinkedList;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -18,6 +22,7 @@ public class NewsFragment extends Fragment {
 
     private ListView newsLv;
     private NewAdapter newAdapter;
+    private LinkedList<PublicationImage> publicationImages;
 
     public NewsFragment() {
         // Required empty public constructor
@@ -30,6 +35,7 @@ public class NewsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_news, container, false);
         newsLv = view.findViewById(R.id.fr_news_lv);
         newAdapter = new NewAdapter();
+
         newsLv.setAdapter(newAdapter);
         return view;
     }
