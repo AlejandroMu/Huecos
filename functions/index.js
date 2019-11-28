@@ -60,15 +60,12 @@ app.get('/publications/like',(req,res)=>{
 		if(likes==undefined){
 			likes=[];
 		}
-		var msm='';
 		if(likes.includes(user)){
 			var i = likes.indexOf( user );
-			msm='like eliminado';
 			if ( i !== -1 ) {
 				likes.splice( i, 1 );
 			}
 		}else{
-			msm='like agregado';
 			likes.push(user);
 		}
 		var state=val.state;
@@ -80,12 +77,35 @@ app.get('/publications/like',(req,res)=>{
 		admin.database().ref().child("publications")
 			.child(state).child(userPro).child(pub).set(val);
 		res.status(200);
-		res.send(msm);
+		res.send(val);
 		
 		
 	});
 
 	
+});
+
+app.get('/publications/state',(req,res)=>{
+	var pub=req.query.pub;
+	var state=req.query.state;
+	admin.database().ref().child("publications").child('ALL')
+	.child(pub).once('value',(snap)=>{
+		var publication=snap.val();
+		var oldState=publication.state;
+		publication.state=state;
+
+		admin.database().ref().child("publications")
+			.child('ALL').child(pub).set(publication);
+
+		admin.database().ref().child("publications")
+			.child(oldState).child(publication.user).child(pub).set(null);
+
+		admin.database().ref().child("publications")
+			.child(state).child(publication.user).child(pub).set(publication);
+
+
+		res.send(publication);
+	});
 });
 
 exports.functions = functions.https.onRequest(app);

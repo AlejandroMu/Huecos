@@ -29,6 +29,10 @@ public class Publication {
     private String state;
     private List<String> likes;
 
+    public Publication(){
+
+    }
+
     public Publication(String id,String pathImage, String location, String description, long date, String state, List<String> likes,String user) {
         this.id = id;
         this.pathImage = pathImage;

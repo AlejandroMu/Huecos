@@ -53,6 +53,7 @@ public class Signup extends AppCompatActivity {
                         User us=new User();
                         us.setPassword(password);
                         us.setUsername(username);
+                        us.setEmail(user);
                         us.addRole(Role.CLIENT);
                         db.getReference().child(User.BRANCH).child(user.replace(".","_")).setValue(us);
                         Person person=new Person();

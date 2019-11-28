@@ -1,6 +1,7 @@
 package com.example.huecoscolombia;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,8 +13,11 @@ import android.widget.TextView;
 
 import com.example.huecoscolombia.Model.entity.Publication;
 import com.example.huecoscolombia.util.ClientRest;
+import com.example.huecoscolombia.util.Response;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 
@@ -21,13 +25,15 @@ public class NewAdapter extends BaseAdapter {
 
     public static int PAGE=1;
     private ClientRest rest;
+    private Response res;
 
     private LinkedList<Publication> news;
 
-    public NewAdapter () {
+    public NewAdapter (Response r) {
 
         news = new LinkedList<>();
         rest=new ClientRest();
+        res=r;
     }
 
     @Override
@@ -59,12 +65,14 @@ public class NewAdapter extends BaseAdapter {
         picture.setImageBitmap(object.getImage());
         int likes=object.getLikes()!=null?object.getLikes().size():0;
         numLike.setText(likes+"");
-        date.setText((new Date(object.getDate())).toString());
+        DateFormat format=new SimpleDateFormat("dd-MM-yyyy");
+
+        date.setText(format.format(new Date(object.getDate())));
         description.setText(object.getDescription());
 
         like.setOnClickListener((v1)->{
-            Log.e("like","button");
-            rest.addLike(object, FirebaseAuth.getInstance().getCurrentUser().getEmail());
+
+            rest.addLike(object, FirebaseAuth.getInstance().getCurrentUser().getEmail(),res );
         });
 
         return v;
@@ -77,6 +85,7 @@ public class NewAdapter extends BaseAdapter {
             news.pop();
         }
         news.add(image);
+        notifyDataSetChanged();
     }
 
 }

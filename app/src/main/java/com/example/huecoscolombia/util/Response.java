@@ -8,7 +8,7 @@ import java.util.*;
 
 public interface Response {
 
-    void responseImage(Bitmap bitmap);
-    void responsePublication(LinkedList<Publication> publications);
+    void responsePublications(LinkedList<Publication> publications);
     void responseImage(Publication pub,Bitmap image);
+    void responsePublication(Publication old,Publication newP);
 }

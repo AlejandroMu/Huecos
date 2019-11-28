@@ -37,7 +37,7 @@ public class NewsFragment extends Fragment implements Response {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_news, container, false);
         newsLv = view.findViewById(R.id.fr_news_lv);
-        newAdapter = new NewAdapter();
+        newAdapter = new NewAdapter(this);
         ClientRest rest=new ClientRest();
         rest.getPubications(0,-1,-1,this);
 
@@ -45,16 +45,9 @@ public class NewsFragment extends Fragment implements Response {
         return view;
     }
 
-    @Override
-    public void responseImage(Bitmap bitmap) {
-        getActivity().runOnUiThread(()->{
-
-
-        });
-    }
 
     @Override
-    public void responsePublication(LinkedList<Publication> publications) {
+    public void responsePublications(LinkedList<Publication> publications) {
         getActivity().runOnUiThread(()->{
             newAdapter.setList(publications);
             newAdapter.notifyDataSetChanged();
@@ -69,5 +62,15 @@ public class NewsFragment extends Fragment implements Response {
             pub.setImage(image);
             newAdapter.notifyDataSetChanged();
         });
+    }
+
+    @Override
+    public void responsePublication(Publication old,Publication newP) {
+        getActivity().runOnUiThread(()->{
+            old.setLikes(newP.getLikes());
+
+            newAdapter.notifyDataSetChanged();
+        });
+
     }
 }

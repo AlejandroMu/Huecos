@@ -30,11 +30,10 @@ public class ClientRest {
                 }
 
                 String resp=util.GETrequest(Publication.URL+params);
-                Log.e("publications",resp);
                 Gson gson=new Gson();
                 Type type=new TypeToken<LinkedList<Publication>>(){}.getType();
                 LinkedList<Publication> list=gson.fromJson(resp,type);
-                res.responsePublication(list);
+                res.responsePublications(list);
                 for(Publication p:list){
                     String urlI=p.getPathImage();
                     Bitmap map=getImage(urlI);
@@ -69,23 +68,23 @@ public class ClientRest {
         return null;
     }
 
-    public void getImage(String urlI, Response res){
+    public void getImage(Publication pub, Response res){
         new Thread(()->{
-        Bitmap map=getImage(urlI);
-        res.responseImage(map);
+        Bitmap map=getImage(pub.getPathImage());
+        res.responseImage(pub,map);
         }).start();
 
     }
-    public void addLike(Publication p, String user){
-        Log.e("Like", "addLike");
+    public void addLike(Publication p, String user,Response response){
 
         String body="/like?pub="+p.getId()+"&user="+user;
         new Thread(()->{
             try {
-                Log.e("Like", "sending "+body+" link "+Publication.URL+body);
                 HTTPSWebUtilDomi utilDomi=new HTTPSWebUtilDomi();
                 String res=utilDomi.GETrequest(Publication.URL+body);
-                Log.e("likes add",res);
+                Gson gson=new Gson();
+                Publication resp=gson.fromJson(res,Publication.class);
+                response.responsePublication(p,resp);
 
             }catch (Exception e){
                 Log.e("likes","exception : "+e.getMessage());
@@ -93,6 +92,10 @@ public class ClientRest {
             }
 
         }).start();
+
+    }
+
+    public void getObject(){
 
     }
 
