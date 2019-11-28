@@ -26,6 +26,9 @@ public class Login extends AppCompatActivity {
         auth=FirebaseAuth.getInstance();
         if(auth.getCurrentUser()!=null){
 
+            startActivity(new Intent(this,TakePhoto.class));
+
+            finish();
         }
         username=findViewById(R.id.login_email_et);
         password=findViewById(R.id.login_password_et);

@@ -1,6 +1,8 @@
 package com.example.huecoscolombia;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,21 +12,28 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.huecoscolombia.Model.entity.Publication;
-import com.example.huecoscolombia.Model.entity.PublicationImage;
+import com.example.huecoscolombia.util.ClientRest;
+import com.example.huecoscolombia.util.Response;
+import com.google.firebase.auth.FirebaseAuth;
 
-import java.util.ArrayList;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
-import java.util.List;
 
 public class NewAdapter extends BaseAdapter {
 
     public static int PAGE=1;
+    private ClientRest rest;
+    private Response res;
 
-    private LinkedList<PublicationImage> news;
+    private LinkedList<Publication> news;
 
-    public NewAdapter () {
+    public NewAdapter (Response r) {
+
         news = new LinkedList<>();
+        rest=new ClientRest();
+        res=r;
     }
 
     @Override
@@ -33,7 +42,7 @@ public class NewAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int i) {
+    public Publication getItem(int i) {
         return news.get(i);
     }
 
@@ -52,21 +61,31 @@ public class NewAdapter extends BaseAdapter {
         TextView numLike = v.findViewById(R.id.row_new_num_like_tv);
         TextView date = v.findViewById(R.id.row_new_date_tv);
         TextView description = v.findViewById(R.id.row_new_description_tv);
-        PublicationImage object=news.get(i);
+        Publication object=news.get(i);
         picture.setImageBitmap(object.getImage());
-        numLike.setText(object.getPublication().getLikes()+"");
-        date.setText((new Date(object.getPublication().getDate())).toString());
-        description.setText(object.getPublication().getDescription());
+        int likes=object.getLikes()!=null?object.getLikes().size():0;
+        numLike.setText(likes+"");
+        DateFormat format=new SimpleDateFormat("dd-MM-yyyy");
+
+        date.setText(format.format(new Date(object.getDate())));
+        description.setText(object.getDescription());
+
+        like.setOnClickListener((v1)->{
+
+            rest.addLike(object, FirebaseAuth.getInstance().getCurrentUser().getEmail(),res );
+        });
+
         return v;
     }
-    public void setList(LinkedList<PublicationImage> images){
+    public void setList(LinkedList<Publication> images){
         news=images;
     }
-    public void addElement(PublicationImage image){
+    public void addElement(Publication image){
         if(news.size()>30){
             news.pop();
         }
         news.add(image);
+        notifyDataSetChanged();
     }
 
 }

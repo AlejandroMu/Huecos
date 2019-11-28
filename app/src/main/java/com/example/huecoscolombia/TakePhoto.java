@@ -34,7 +34,6 @@ public class TakePhoto extends AppCompatActivity implements View.OnClickListener
     private InfoFragment infoFragment;
     private PublishPhotoFragment publishPhotoFragment;
 
-    FirebaseAuth auth;
 
     public static final int PRIMARY_COLOR=R.color.colorPrimary;
     public static final int ACENT_COLOR=R.color.colorAccent;
@@ -43,11 +42,7 @@ public class TakePhoto extends AppCompatActivity implements View.OnClickListener
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_take_photo);
-        auth=FirebaseAuth.getInstance();
-        if(auth.getCurrentUser()==null){
-            startActivity(new Intent(this,Login.class));
-            finish();
-        }
+
         ActivityCompat.requestPermissions(this, new String[]{
                 Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -154,6 +149,7 @@ public class TakePhoto extends AppCompatActivity implements View.OnClickListener
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction ft = manager.beginTransaction();
         ft.replace(R.id.take_photo_container_ll, newsFragment);
+        changeColor(newsLl);
         ft.commit();
     }
 

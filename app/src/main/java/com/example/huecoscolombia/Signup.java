@@ -6,6 +6,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.huecoscolombia.Model.entity.Person;
+import com.example.huecoscolombia.Model.entity.Role;
 import com.example.huecoscolombia.Model.entity.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
@@ -52,6 +53,8 @@ public class Signup extends AppCompatActivity {
                         User us=new User();
                         us.setPassword(password);
                         us.setUsername(username);
+                        us.setEmail(user);
+                        us.addRole(Role.CLIENT);
                         db.getReference().child(User.BRANCH).child(user.replace(".","_")).setValue(us);
                         Person person=new Person();
                         person.setEmail(user);

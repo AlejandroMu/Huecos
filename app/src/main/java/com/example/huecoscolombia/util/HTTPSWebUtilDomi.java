@@ -81,7 +81,7 @@ public class HTTPSWebUtilDomi {
         connection.setRequestProperty("accept", "application/json");
         connection.setDoInput(true);
         connection.setDoOutput(true);
-        //connection.connect();
+        connection.connect();
 
         String query = json;
 
