@@ -1,6 +1,7 @@
 package com.example.huecoscolombia;
 
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,18 +12,20 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.example.huecoscolombia.Model.entity.Publication;
+import com.example.huecoscolombia.util.ClientRest;
+import com.example.huecoscolombia.util.Response;
 
 import java.util.LinkedList;
+import java.util.List;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NewsFragment extends Fragment {
+public class NewsFragment extends Fragment implements Response {
 
     private ListView newsLv;
     private NewAdapter newAdapter;
-    private LinkedList<Publication> publicationImages;
 
     public NewsFragment() {
         // Required empty public constructor
@@ -35,9 +38,36 @@ public class NewsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_news, container, false);
         newsLv = view.findViewById(R.id.fr_news_lv);
         newAdapter = new NewAdapter();
+        ClientRest rest=new ClientRest();
+        rest.getPubications(0,-1,-1,this);
 
         newsLv.setAdapter(newAdapter);
         return view;
     }
 
+    @Override
+    public void responseImage(Bitmap bitmap) {
+        getActivity().runOnUiThread(()->{
+
+
+        });
+    }
+
+    @Override
+    public void responsePublication(LinkedList<Publication> publications) {
+        getActivity().runOnUiThread(()->{
+            newAdapter.setList(publications);
+            newAdapter.notifyDataSetChanged();
+
+        });
+
+    }
+
+    @Override
+    public void responseImage(Publication pub, Bitmap image) {
+        getActivity().runOnUiThread(()->{
+            pub.setImage(image);
+            newAdapter.notifyDataSetChanged();
+        });
+    }
 }

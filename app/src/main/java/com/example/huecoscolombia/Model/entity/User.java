@@ -5,6 +5,7 @@ import com.example.huecoscolombia.Model.driver.Foreign;
 import com.example.huecoscolombia.Model.driver.Id;
 import com.example.huecoscolombia.Model.driver.Table;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Table(name = "USER")
@@ -19,6 +20,18 @@ public class User {
     private String email;
     private String state;
     private List<Role> roles;
+
+    public User(){
+        roles=new ArrayList<>();
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public String getUsername() {
         return username;
@@ -58,5 +71,9 @@ public class User {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    public void addRole(Role role){
+        roles.add(role);
     }
 }

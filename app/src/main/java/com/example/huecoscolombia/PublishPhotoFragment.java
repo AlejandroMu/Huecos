@@ -23,6 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.UUID;
 
 
@@ -82,7 +83,8 @@ public class PublishPhotoFragment extends Fragment implements TakePhotoFragment.
                           direction.getText().toString(),
                           description.getText().toString(),
                           System.currentTimeMillis(),
-                          Publication.TO_DO,0,auth.getCurrentUser().getEmail().replace(".","_"));
+                          Publication.TO_DO,new ArrayList<>(),auth.getCurrentUser().getEmail().replace(".","_"));
+                  publication.addLike(auth.getCurrentUser().getEmail());
 
                   db.getReference().child(Publication.BRANCH).child(Publication.TO_DO)
                           .child(auth.getCurrentUser().getEmail().replace(".","_"))

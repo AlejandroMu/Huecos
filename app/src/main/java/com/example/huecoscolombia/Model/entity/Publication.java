@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import com.example.huecoscolombia.Model.driver.Id;
 
 import java.util.Date;
+import java.util.List;
 
 public class Publication {
     public static final String URL="https://us-central1-huecos-colombia-114c0.cloudfunctions.net/functions/publications";
@@ -26,9 +27,9 @@ public class Publication {
     private String user;
     private long date;
     private String state;
-    private int likes;
+    private List<String> likes;
 
-    public Publication(String id,String pathImage, String location, String description, long date, String state, int likes,String user) {
+    public Publication(String id,String pathImage, String location, String description, long date, String state, List<String> likes,String user) {
         this.id = id;
         this.pathImage = pathImage;
         this.location = location;
@@ -95,11 +96,11 @@ public class Publication {
         this.state = state;
     }
 
-    public int getLikes() {
+    public List<String> getLikes() {
         return likes;
     }
 
-    public void setLikes(int likes) {
+    public void setLikes(List<String> likes) {
         this.likes = likes;
     }
 
@@ -109,5 +110,9 @@ public class Publication {
 
     public void setUser(String user) {
         this.user = user;
+    }
+
+    public void addLike(String us){
+        likes.add(us);
     }
 }

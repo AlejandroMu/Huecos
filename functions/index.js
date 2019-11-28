@@ -31,7 +31,7 @@ app.get('/publications', (req, res) => {
 
 			snap.forEach(
 				(item) => {
-					publications.push({item: item.val(),page:page,range:range,el:el} );														
+					publications.push(item.val());														
 				}
 			);
 
@@ -46,6 +46,41 @@ app.get('/publications', (req, res) => {
 			res.send(out);
 
 	});
+	
+});
+
+app.post('/like',(req,res)=>{
+	var body=req.body;
+	var user=body.user;
+	var pub=body.pub;
+	admin.database().ref().child("publications")
+	.child('ALL').child(pub).once('value',(snap)=>{
+		var val=snap.val();
+		var likes=val.likes;
+		if(likes==undefined){
+			likes=[];
+		}
+		var msm='';
+		if(likes.includes(user)){
+			var i = likes.indexOf( user );
+			msm='like eliminado';
+			if ( i !== -1 ) {
+				likes.splice( i, 1 );
+			}
+		}else{
+			msm='like agregado';
+			likes.push(user);
+		}
+
+		val.likes=likes;
+		admin.database().ref().child("publications")
+			.child('ALL').child(pub).set(val);
+		res.status(200);
+		res.send(msm);
+		
+		
+	});
+
 	
 });
 
