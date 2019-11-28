@@ -1,5 +1,6 @@
 package com.example.huecoscolombia;
 
+import android.content.Intent;
 import android.service.autofill.Dataset;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,11 +8,13 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
 import com.example.huecoscolombia.Model.entity.Person;
+import com.example.huecoscolombia.app.HuecosColombiaApp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -49,9 +52,9 @@ public class ListUsersAdminAdapter extends BaseAdapter {
         LayoutInflater layoutInflater = LayoutInflater.from(viewGroup.getContext());
         View v = layoutInflater.inflate(R.layout.row_list_users_admin, null);
         TextView name = v.findViewById(R.id.row_list_users_admin_name_tv);
-        Button deleteUser = v.findViewById(R.id.row_list_users_admin_delete_btn);
-        Button editUser = v.findViewById(R.id.row_list_users_admin_edit_btn);
-        Button lockUser = v.findViewById(R.id.row_list_users_admin_lock_btn);
+        ImageButton deleteUser = v.findViewById(R.id.row_list_users_admin_delete_btn);
+        ImageButton editUser = v.findViewById(R.id.row_list_users_admin_edit_btn);
+        ImageButton lockUser = v.findViewById(R.id.row_list_users_admin_lock_btn);
 
         name.setText(persons.get(i).getName());
 
@@ -64,7 +67,9 @@ public class ListUsersAdminAdapter extends BaseAdapter {
         editUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(HuecosColombiaApp.getContext(),EditProfileAdminActivity.class);
+                intent.putExtra("person", persons.get(i));
+                HuecosColombiaApp.getContext().startActivity(intent);
             }
         });
         lockUser.setOnClickListener(new View.OnClickListener() {
