@@ -49,9 +49,9 @@ app.get('/publications', (req, res) => {
 	
 });
 
-app.post('/like',(req,res)=>{
-	var body=req.body;
-	var user=body.user;
+app.get('/publications/like',(req,res)=>{
+	var body=req.query;
+	var user=body.user.toString().replace('_','@');
 	var pub=body.pub;
 	admin.database().ref().child("publications")
 	.child('ALL').child(pub).once('value',(snap)=>{
@@ -71,10 +71,14 @@ app.post('/like',(req,res)=>{
 			msm='like agregado';
 			likes.push(user);
 		}
-
+		var state=val.state;
+		var userPro=val.user;
 		val.likes=likes;
 		admin.database().ref().child("publications")
 			.child('ALL').child(pub).set(val);
+		
+		admin.database().ref().child("publications")
+			.child(state).child(userPro).child(pub).set(val);
 		res.status(200);
 		res.send(msm);
 		

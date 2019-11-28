@@ -4,9 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 
-import com.example.huecoscolombia.Model.entity.LikeDTO;
 import com.example.huecoscolombia.Model.entity.Publication;
-import com.example.huecoscolombia.Model.entity.User;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -15,7 +13,6 @@ import java.lang.reflect.Type;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.LinkedList;
-import java.util.List;
 
 public class ClientRest {
 
@@ -79,16 +76,19 @@ public class ClientRest {
         }).start();
 
     }
-    public void addLike(Publication p, User user){
-        Gson gson=new Gson();
-        String body=gson.toJson(new LikeDTO(user.getEmail(),p.getId()));
+    public void addLike(Publication p, String user){
+        Log.e("Like", "addLike");
+
+        String body="/like?pub="+p.getId()+"&user="+user;
         new Thread(()->{
             try {
+                Log.e("Like", "sending "+body+" link "+Publication.URL+body);
                 HTTPSWebUtilDomi utilDomi=new HTTPSWebUtilDomi();
-                String res=utilDomi.POSTrequest(Publication.URL+"/like",body);
+                String res=utilDomi.GETrequest(Publication.URL+body);
                 Log.e("likes add",res);
 
             }catch (Exception e){
+                Log.e("likes","exception : "+e.getMessage());
 
             }
 

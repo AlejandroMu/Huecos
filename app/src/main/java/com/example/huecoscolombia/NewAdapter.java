@@ -1,6 +1,7 @@
 package com.example.huecoscolombia;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.huecoscolombia.Model.entity.Publication;
+import com.example.huecoscolombia.util.ClientRest;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Date;
 import java.util.LinkedList;
@@ -17,11 +20,14 @@ import java.util.LinkedList;
 public class NewAdapter extends BaseAdapter {
 
     public static int PAGE=1;
+    private ClientRest rest;
 
     private LinkedList<Publication> news;
 
     public NewAdapter () {
+
         news = new LinkedList<>();
+        rest=new ClientRest();
     }
 
     @Override
@@ -51,9 +57,16 @@ public class NewAdapter extends BaseAdapter {
         TextView description = v.findViewById(R.id.row_new_description_tv);
         Publication object=news.get(i);
         picture.setImageBitmap(object.getImage());
-        numLike.setText(object.getLikes()+"");
+        int likes=object.getLikes()!=null?object.getLikes().size():0;
+        numLike.setText(likes+"");
         date.setText((new Date(object.getDate())).toString());
         description.setText(object.getDescription());
+
+        like.setOnClickListener((v1)->{
+            Log.e("like","button");
+            rest.addLike(object, FirebaseAuth.getInstance().getCurrentUser().getEmail());
+        });
+
         return v;
     }
     public void setList(LinkedList<Publication> images){

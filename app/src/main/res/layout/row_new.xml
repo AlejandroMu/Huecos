@@ -23,11 +23,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="30sp"
+                android:textColor="#fff"
+                android:text="likes"
                 android:id="@+id/row_new_num_like_tv"
                 android:layout_marginLeft="10dp"/>
             <ImageButton
                 android:layout_width="60dp"
                 android:layout_height="60dp"
+                android:background="@drawable/like"
                 android:id="@+id/row_new_like_btn"
                 android:layout_marginLeft="10dp"/>
             <TextView
