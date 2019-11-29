@@ -61,7 +61,8 @@ public class ClientRest {
                 Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
                 inputStream.close();
                 return bitmap;
-            } catch (IOException e) {
+            } catch (Exception e) {
+                Log.e("exc",e.getMessage());
                 return null;
             }
         }
