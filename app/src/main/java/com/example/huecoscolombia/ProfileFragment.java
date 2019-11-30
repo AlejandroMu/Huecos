@@ -4,8 +4,10 @@ package com.example.huecoscolombia;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.huecoscolombia.Model.entity.Person;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 /**
@@ -38,7 +47,7 @@ public class ProfileFragment extends Fragment {
         editProfile = view.findViewById(R.id.fr_profile_edit_profile_btn);;
         picture = view.findViewById(R.id.fr_profile_picture_img);
         name = view.findViewById(R.id.fr_profile_name_tv);
-
+        getCurrentUser();
         messages.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -67,6 +76,29 @@ public class ProfileFragment extends Fragment {
                 }
         );
         return view;
+    }
+
+    public void getCurrentUser(){
+        String email  = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        FirebaseDatabase.getInstance().getReference()
+                .child("persons")
+                .child(email.replace(".","_"))
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange( DataSnapshot dataSnapshot) {
+                        Person person = dataSnapshot.getValue(Person.class);
+                        getPerson(person);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+    }
+
+    public void getPerson(Person  p) {
+        name.setText(p.getName());
     }
 
 }

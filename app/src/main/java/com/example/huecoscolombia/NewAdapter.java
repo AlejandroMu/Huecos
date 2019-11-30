@@ -65,9 +65,17 @@ public class NewAdapter extends BaseAdapter {
                 like.setBackgroundResource(R.drawable.star_for_like);
             }
         }
+        if(aux.getState().equals(Publication.TO_DO)){
+            check.setBackgroundResource(R.drawable.check_request);
+        } else if(aux.getState().equals(Publication.IN_PROGRESS)) {
+            check.setBackgroundResource(R.drawable.checked_process);
+        } else {
+            check.setBackgroundResource(R.drawable.checked_succes);
+        }
         TextView numLike = v.findViewById(R.id.row_new_num_like_tv);
         TextView date = v.findViewById(R.id.row_new_date_tv);
         TextView description = v.findViewById(R.id.row_new_description_tv);
+        TextView direction = v.findViewById(R.id.row_new_direction_tv);
         Publication object=news.get(i);
         picture.setImageBitmap(object.getImage());
         int likes=object.getLikes()!=null?object.getLikes().size():0;
@@ -76,6 +84,7 @@ public class NewAdapter extends BaseAdapter {
 
         date.setText(format.format(new Date(object.getDate())));
         description.setText(object.getDescription());
+        direction.setText(object.getLocation());
 
         like.setOnClickListener((v1)->{
 

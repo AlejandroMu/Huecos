@@ -37,7 +37,8 @@
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginLeft="5dp"/>
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/avatar"/>
             <ImageButton
                 android:layout_width="60dp"
                 android:layout_height="60dp"
