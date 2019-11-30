@@ -4,14 +4,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class AdminActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private ImageButton picturesBtn, listBtn, listUsersBtn, messagesBtn;
+    private ImageButton picturesBtn, listBtn, listUsersBtn, messagesBtn, logout;
     private LinearLayout containerLl, picturesLl, listLl, listUsersLl, messagesLl;
 
     private PicturesAdminFragment picturesAdminFragment;
@@ -40,11 +43,19 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
         listLl = findViewById(R.id.admin_list_ll);
         listUsersLl = findViewById(R.id.admin_list_users_ll);
         messagesLl = findViewById(R.id.admin_messages_ll);
+        logout = findViewById(R.id.admin_logout_btn);
 
         picturesBtn.setOnClickListener(this);
         listBtn.setOnClickListener(this);
         listUsersBtn.setOnClickListener(this);
         messagesBtn.setOnClickListener(this);
+        logout.setOnClickListener(
+                view -> {
+                    FirebaseAuth.getInstance().signOut();
+                    startActivity(new Intent(this, Login.class));
+                    finish();
+                }
+        );
 
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction ft = manager.beginTransaction();
@@ -110,5 +121,10 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
             listUsersBtn.setBackgroundResource(R.drawable.list_users_primary);
             messagesBtn.setBackgroundResource(R.drawable.messages_acent);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+
     }
 }

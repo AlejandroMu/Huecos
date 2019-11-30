@@ -25,9 +25,11 @@ public class Login extends AppCompatActivity {
 
         auth=FirebaseAuth.getInstance();
         if(auth.getCurrentUser()!=null){
-
-            startActivity(new Intent(this,TakePhoto.class));
-
+            if(auth.getCurrentUser().getEmail().contains("hotmail")){
+                startActivity(new Intent(this,AdminActivity.class));
+            } else {
+                startActivity(new Intent(this,TakePhoto.class));
+            }
             finish();
         }
         username=findViewById(R.id.login_email_et);
@@ -40,8 +42,12 @@ public class Login extends AppCompatActivity {
             String password=this.password.getText().toString();
             auth.signInWithEmailAndPassword(username,password).addOnCompleteListener((task)->{
                 if(task.isSuccessful()){
-                    Intent i=new Intent(this, TakePhoto.class);
-                    startActivity(i);
+                    if(username.contains("hotmail")){
+                        startActivity(new Intent(this,AdminActivity.class));
+                    } else {
+                        startActivity(new Intent(this,TakePhoto.class));
+                    }
+                    finish();
                 }
 
             });
@@ -51,6 +57,12 @@ public class Login extends AppCompatActivity {
             Intent i=new Intent(this, Signup.class);
             startActivity(i);
         });
+
+
+    }
+
+    @Override
+    public void onBackPressed() {
 
     }
 }

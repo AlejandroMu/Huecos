@@ -41,7 +41,8 @@
             android:textColor="#000"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="15dp"
-            android:textColorHint="#757575"/>
+            android:textColorHint="#757575"
+            android:inputType="textPassword"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

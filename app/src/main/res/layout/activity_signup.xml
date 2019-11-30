@@ -57,7 +57,8 @@
             android:padding="10dp"
             android:layout_margin="15dp"
             android:id="@+id/signup_password_et"
-            android:textColorHint="#757575"/>
+            android:textColorHint="#757575"
+            android:inputType="textPassword"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -68,7 +69,8 @@
             android:textColor="#000"
             android:layout_margin="15dp"
             android:id="@+id/signup_repassword_et"
-            android:textColorHint="#757575"/>
+            android:textColorHint="#757575"
+            android:inputType="textPassword"/>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -85,4 +87,11 @@
                 android:id="@+id/signup_signup_btn"/>
         </RelativeLayout>
     </LinearLayout>
+    <ImageButton
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/back_arrow"
+        android:id="@+id/signup_back_btn"/>
 </RelativeLayout>

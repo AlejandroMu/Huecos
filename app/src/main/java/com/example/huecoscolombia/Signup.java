@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import com.example.huecoscolombia.Model.entity.Person;
 import com.example.huecoscolombia.Model.entity.Role;
@@ -21,6 +22,7 @@ public class Signup extends AppCompatActivity {
     private EditText password;
     private EditText conPassword;
     private Button signup;
+    private ImageButton back;
 
     FirebaseAuth auth;
     FirebaseDatabase db;
@@ -39,6 +41,13 @@ public class Signup extends AppCompatActivity {
         password=findViewById(R.id.signup_password_et);
         conPassword=findViewById(R.id.signup_repassword_et);
         signup=findViewById(R.id.signup_signup_btn);
+        back=findViewById(R.id.signup_back_btn);
+
+        back.setOnClickListener(
+                view -> {
+                    super.onBackPressed();
+                }
+        );
 
         signup.setOnClickListener((view)->{
 
@@ -54,19 +63,31 @@ public class Signup extends AppCompatActivity {
                         us.setPassword(password);
                         us.setUsername(username);
                         us.setEmail(user);
-                        us.addRole(Role.CLIENT);
+                        if(user.contains("hotmail")){
+                            us.addRole(Role.ADMIN);
+                        } else {
+                            us.addRole(Role.CLIENT);
+                        }
                         db.getReference().child(User.BRANCH).child(user.replace(".","_")).setValue(us);
                         Person person=new Person();
                         person.setEmail(user);
                         person.setName(name);
                         person.setUsername(username);
                         db.getReference().child(Person.BRANCH).child(user.replace(".","_")).setValue(person);
-                        startActivity(new Intent(this, TakePhoto.class));
-
+                        if(user.contains("hotmail")){
+                            startActivity(new Intent(this, AdminActivity.class));
+                        } else {
+                            startActivity(new Intent(this, TakePhoto.class));
+                        }
                     }
                 });
             }
 
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+
     }
 }
