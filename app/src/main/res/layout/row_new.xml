@@ -22,26 +22,26 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="30sp"
+                android:textSize="20sp"
                 android:textColor="#fff"
                 android:text="likes"
                 android:id="@+id/row_new_num_like_tv"
                 android:layout_marginLeft="10dp"/>
             <ImageButton
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:background="@drawable/like"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/star_without_like"
                 android:id="@+id/row_new_like_btn"
                 android:layout_marginLeft="10dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="30sp"
+                android:textSize="20sp"
                 android:id="@+id/row_new_date_tv"
                 android:layout_marginLeft="10dp"/>
             <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginLeft="10dp"
                 android:id="@+id/row_new_check_img"/>
         </LinearLayout>

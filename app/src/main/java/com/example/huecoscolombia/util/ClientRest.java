@@ -88,11 +88,8 @@ public class ClientRest {
 
             }catch (Exception e){
                 Log.e("likes","exception : "+e.getMessage());
-
             }
-
         }).start();
-
     }
 
     public void getObject(){

@@ -58,6 +58,13 @@ public class NewAdapter extends BaseAdapter {
         ImageView picture = v.findViewById(R.id.row_new_picture_img);
         ImageView check = v.findViewById(R.id.row_new_check_img);
         ImageButton like = v.findViewById(R.id.row_new_like_btn);
+        boolean esta = false;
+        Publication aux = news.get(i);
+        if(aux.getLikes()!=null){
+            if(aux.getLikes().contains(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
+                like.setBackgroundResource(R.drawable.star_for_like);
+            }
+        }
         TextView numLike = v.findViewById(R.id.row_new_num_like_tv);
         TextView date = v.findViewById(R.id.row_new_date_tv);
         TextView description = v.findViewById(R.id.row_new_description_tv);
@@ -73,6 +80,7 @@ public class NewAdapter extends BaseAdapter {
         like.setOnClickListener((v1)->{
 
             rest.addLike(object, FirebaseAuth.getInstance().getCurrentUser().getEmail(),res );
+            like.setBackgroundResource(R.drawable.star_for_like);
         });
 
         return v;
