@@ -20,14 +20,15 @@
             android:textSize="30sp"
             android:textColor="@color/colorAccent"/>
     </Toolbar>
-    <LinearLayout
+    <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_marginBottom="75dp"
         android:layout_marginTop="60dp"
-        android:background="#fffde7">
-    </LinearLayout>
+        android:background="#fffde7"
+        android:id="@+id/list_message"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="75dp"
@@ -44,6 +45,7 @@
             android:layout_marginRight="75dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
+            android:id="@+id/message_et"
             />
     </LinearLayout>
 
