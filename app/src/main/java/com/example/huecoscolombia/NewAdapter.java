@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 
@@ -58,7 +59,6 @@ public class NewAdapter extends BaseAdapter {
         ImageView picture = v.findViewById(R.id.row_new_picture_img);
         ImageView check = v.findViewById(R.id.row_new_check_img);
         ImageButton like = v.findViewById(R.id.row_new_like_btn);
-        boolean esta = false;
         Publication aux = news.get(i);
         if(aux.getLikes()!=null){
             if(aux.getLikes().contains(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
@@ -91,7 +91,6 @@ public class NewAdapter extends BaseAdapter {
             rest.addLike(object, FirebaseAuth.getInstance().getCurrentUser().getEmail(),res );
             like.setBackgroundResource(R.drawable.star_for_like);
         });
-
         return v;
     }
     public void setList(LinkedList<Publication> images){

@@ -93,6 +93,22 @@ public class ClientRest {
         }).start();
     }
 
+    public void changeState(Publication p, String state, Response response) {
+        String body = "/state?pub="+p.getId()+"&state="+state;
+        new Thread(()->{
+            try {
+                HTTPSWebUtilDomi utilDomi=new HTTPSWebUtilDomi();
+                String res=utilDomi.GETrequest(Publication.URL+body);
+                Gson gson=new Gson();
+                Publication resp=gson.fromJson(res,Publication.class);
+                response.responsePublication(p,resp);
+
+            }catch (Exception e){
+                Log.e("likes","exception : "+e.getMessage());
+            }
+        }).start();
+    }
+
     public void getObject(){
 
     }

@@ -30,6 +30,8 @@
     <string name="search">Buscar</string>
     <string name="users">Usuarios</string>
     <string name="all">Todos</string>
+    <string name="to_finish">Terminar</string>
+    <string name="done">Hecho</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -1,28 +1,53 @@
 package com.example.huecoscolombia;
 
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterViewFlipper;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.ViewFlipper;
+
+import com.example.huecoscolombia.Model.entity.Publication;
+import com.example.huecoscolombia.app.HuecosColombiaApp;
+import com.example.huecoscolombia.util.ClientRest;
+import com.example.huecoscolombia.util.Response;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PicturesAdminFragment extends Fragment {
+public class PicturesAdminFragment extends Fragment implements Response {
 
-    private ImageView pictureImg, checkImg;
-    private ImageButton likeBtn;
-    private TextView dateTv, numLikesTv, directionTv, descriptionTv;
-    private Button inProcessBtn, messagesBtn, deleteBtn;
+    private ImageButton previousBtn, nextBtn;
+    private AdapterViewFlipper publicationsAVF;
+    private ContainerPubllicationsAdapter containerPubllicationsAdapter;
+
+    FirebaseDatabase db;
 
     public PicturesAdminFragment() {
         // Required empty public constructor
@@ -33,36 +58,50 @@ public class PicturesAdminFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_pictures_admin, container, false);
-        pictureImg = view.findViewById(R.id.fr_pictures_admin_picture_img);
-        checkImg = view.findViewById(R.id.fr_pictures_admin_check_img);
-        likeBtn = view.findViewById(R.id.fr_pictures_admin_like_btn);
-        dateTv = view.findViewById(R.id.fr_pictures_admin_date_tv);
-        numLikesTv = view.findViewById(R.id.fr_pictures_admin_num_like_tv);
-        directionTv = view.findViewById(R.id.fr_pictures_admin_direction_tv);
-        descriptionTv = view.findViewById(R.id.fr_pictures_admin_description_tv);
-        inProcessBtn = view.findViewById(R.id.fr_pictures_admin_inprocess_btn);
-        messagesBtn = view.findViewById(R.id.fr_pictures_admin_messages_btn);
-        deleteBtn = view.findViewById(R.id.fr_pictures_admin_delete_btn);
+        db = FirebaseDatabase.getInstance();
+        previousBtn = view.findViewById(R.id.fr_pictures_admin_previous_pub_btn);
+        nextBtn = view.findViewById(R.id.fr_pictures_admin_next_pub_btn);
+        publicationsAVF = view.findViewById(R.id.fr_pictures_admin_publication_avf);
+        containerPubllicationsAdapter = new ContainerPubllicationsAdapter(this);
+        ClientRest rest=new ClientRest();
+        rest.getPubications(0,-1,-1,this);
+        previousBtn.setOnClickListener(
+                view1 -> {
+                    publicationsAVF.showPrevious();
+                }
+        );
+        nextBtn.setOnClickListener(
+                view1 -> {
+                    publicationsAVF.showNext();
+                }
+        );
 
-        inProcessBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-        messagesBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-        deleteBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
+        publicationsAVF.setAdapter(containerPubllicationsAdapter);
         return view;
+    }
+
+    @Override
+    public void responsePublications(LinkedList<Publication> publications) {
+        getActivity().runOnUiThread(()->{
+            containerPubllicationsAdapter.setList(publications);
+            containerPubllicationsAdapter.notifyDataSetChanged();
+        });
+    }
+
+    @Override
+    public void responseImage(Publication pub, Bitmap image) {
+        getActivity().runOnUiThread(()->{
+            pub.setImage(image);
+            containerPubllicationsAdapter.notifyDataSetChanged();
+        });
+    }
+
+    @Override
+    public void responsePublication(Publication old, Publication newP) {
+        getActivity().runOnUiThread(()->{
+            old.setState(newP.getState());
+            containerPubllicationsAdapter.notifyDataSetChanged();
+        });
     }
 
 }
