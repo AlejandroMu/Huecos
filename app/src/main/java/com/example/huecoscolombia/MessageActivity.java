@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.provider.FontRequest;
 import android.util.Log;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -21,11 +22,13 @@ import android.widget.TextView;
 
 import com.example.huecoscolombia.Model.entity.Message;
 import com.example.huecoscolombia.Model.entity.Role;
+import com.example.huecoscolombia.util.ClientRest;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,21 +40,19 @@ public class MessageActivity extends AppCompatActivity {
     private ImageButton send;
     private ListView messages;
     private EditText message;
-    private ListAdapter adapter;
-    private List<String> msms;
+    private MessageAdapter adapter;
 
     FirebaseDatabase db;
     FirebaseAuth auth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
-        EmojiCompat.Config emoji = new BundledEmojiCompatConfig(this);
         db=FirebaseDatabase.getInstance();
         auth=FirebaseAuth.getInstance();
-        msms=new ArrayList<>();
-        adapter=new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,msms);
+        adapter=new MessageAdapter();
 
         send=findViewById(R.id.message_send_btn);
         messages=findViewById(R.id.list_message);
@@ -64,15 +65,21 @@ public class MessageActivity extends AppCompatActivity {
                     super.onBackPressed();
                 }
         );
+        ClientRest clientRest=new ClientRest();
+        clientRest.getMessage(auth.getCurrentUser().getEmail().replace(".","_"),(list)->{
+            runOnUiThread(()->{
+                adapter.setList(list);
+            });
+        });
+
         send.setOnClickListener(v->{
             String msm=message.getText().toString();
             if(!msm.isEmpty()){
                 String id= UUID.randomUUID().toString();
                 String userId=auth.getCurrentUser().getEmail();
-                Log.e("userId",auth.getCurrentUser().getUid());
                 Message newMessage=new Message(id,userId,msm,System.currentTimeMillis());
                 db.getReference().child(Message.BRANCH).child(Role.ADMIN.toString()).child(id).setValue(newMessage);
-                msms.add(msm);
+                db.getReference().child(Message.BRANCH).child(userId.replace(".","_")).child(id).setValue(newMessage);
                 message.setText("");
              }
         });
@@ -81,7 +88,7 @@ public class MessageActivity extends AppCompatActivity {
                     @Override
                     public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                         Message newM=dataSnapshot.getValue(Message.class);
-                        msms.add(newM.getMessage());
+                        adapter.addMessage(newM);
                     }
 
                     @Override

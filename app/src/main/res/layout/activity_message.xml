@@ -27,6 +27,7 @@
         android:layout_marginBottom="75dp"
         android:layout_marginTop="60dp"
         android:background="#fffde7"
+
         android:id="@+id/list_message"/>
 
     <LinearLayout

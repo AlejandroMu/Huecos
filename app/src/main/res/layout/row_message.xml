@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimary"
+        android:textSize="40sp"
+        android:visibility="gone"
+        android:id="@+id/message_show_tv"/>
+    <TextView
+        android:layout_below="@id/message_show_tv"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:textSize="10sp"
+        android:visibility="gone"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/message_date_tv"/>
+
+    <TextView
+        android:visibility="gone"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimary"
+        android:textSize="40sp"
+        android:layout_alignParentRight="true"
+        android:textAlignment="textEnd"
+        android:id="@+id/message_show_tv_right"/>
+    <TextView
+        android:layout_below="@id/message_show_tv_right"
+        android:visibility="gone"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:textSize="10sp"
+        android:layout_alignParentRight="true"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/message_date_tv_right"/>
+
+
+
+</RelativeLayout>
