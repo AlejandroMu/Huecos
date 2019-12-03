@@ -21,6 +21,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.huecoscolombia.Model.entity.Message;
+import com.example.huecoscolombia.Model.entity.Person;
 import com.example.huecoscolombia.Model.entity.Role;
 import com.example.huecoscolombia.util.ClientRest;
 import com.google.firebase.auth.FirebaseAuth;
@@ -41,6 +42,7 @@ public class MessageActivity extends AppCompatActivity {
     private ListView messages;
     private EditText message;
     private MessageAdapter adapter;
+    private TextView titleTv;
     private String userDestId;
     FirebaseDatabase db;
     FirebaseAuth auth;
@@ -59,6 +61,11 @@ public class MessageActivity extends AppCompatActivity {
         messages=findViewById(R.id.list_message);
         messages.setAdapter(adapter);
         message=findViewById(R.id.message_et);
+        titleTv = findViewById(R.id.message_title_et);
+        Person person = (Person)getIntent().getSerializableExtra("user");
+        if(person!=null){
+            titleTv.setText(person.getName());
+        }
 
         back = findViewById(R.id.message_back_btn);
         back.setOnClickListener(

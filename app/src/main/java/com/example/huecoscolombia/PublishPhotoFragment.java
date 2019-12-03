@@ -83,7 +83,9 @@ public class PublishPhotoFragment extends Fragment implements TakePhotoFragment.
                           direction.getText().toString(),
                           description.getText().toString(),
                           System.currentTimeMillis(),
-                          Publication.TO_DO,new ArrayList<>(),auth.getCurrentUser().getEmail().replace(".","_"));
+                          Publication.TO_DO,new ArrayList<>(),
+                          auth.getCurrentUser().getEmail().replace(".","_"));
+
 
                   db.getReference().child(Publication.BRANCH).child(Publication.TO_DO)
                           .child(auth.getCurrentUser().getEmail().replace(".","_"))

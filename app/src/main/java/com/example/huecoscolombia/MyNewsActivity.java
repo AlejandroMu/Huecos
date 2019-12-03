@@ -46,12 +46,15 @@ public class MyNewsActivity extends AppCompatActivity implements Response ,Value
                 }
         );
         clientRest=new ClientRest();
+
         db.getReference().child(Publication.BRANCH).child(Publication.TO_DO).child(auth.getCurrentUser().getEmail().replace(".","_"))
                 .addListenerForSingleValueEvent(this);
         db.getReference().child(Publication.BRANCH).child(Publication.IN_PROGRESS).child(auth.getCurrentUser().getEmail().replace(".","_"))
                 .addListenerForSingleValueEvent(this);
         db.getReference().child(Publication.BRANCH).child(Publication.DONE).child(auth.getCurrentUser().getEmail().replace(".","_"))
                 .addListenerForSingleValueEvent(this);
+
+
 
 
     }

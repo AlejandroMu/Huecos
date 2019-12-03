@@ -18,7 +18,8 @@
             android:text="@string/messages"
             android:textAlignment="center"
             android:textSize="30sp"
-            android:textColor="@color/colorAccent"/>
+            android:textColor="@color/colorAccent"
+            android:id="@+id/message_title_et"/>
     </Toolbar>
     <ListView
         android:layout_width="match_parent"
