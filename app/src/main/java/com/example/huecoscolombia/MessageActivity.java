@@ -81,6 +81,7 @@ public class MessageActivity extends AppCompatActivity {
                 Message newMessage=new Message(id,auth.getCurrentUser().getEmail(),msm,System.currentTimeMillis());
                 db.getReference().child(Message.BRANCH).child(userDestId).child(userId).child(id).setValue(newMessage);
                 db.getReference().child(Message.BRANCH).child(userId).child(userDestId).child(id).setValue(newMessage);
+                db.getReference().child("notificaciones").child(userId).child(id).setValue(newMessage);
                 message.setText("");
              }
         });

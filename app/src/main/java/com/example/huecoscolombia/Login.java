@@ -7,6 +7,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.huecoscolombia.services.NotiService;
 import com.google.firebase.auth.FirebaseAuth;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,6 +26,8 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         auth=FirebaseAuth.getInstance();
+        Intent service=new Intent(this, NotiService.class);
+        startService(service);
         if(auth.getCurrentUser()!=null){
             if(auth.getCurrentUser().getEmail().contains("hotmail")){
                 startActivity(new Intent(this,AdminActivity.class));

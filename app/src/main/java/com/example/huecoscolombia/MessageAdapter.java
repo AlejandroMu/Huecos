@@ -57,7 +57,7 @@ public class MessageAdapter extends BaseAdapter {
             date = v.findViewById(R.id.message_date_tv);
         }
         TextView dateA=v.findViewById(R.id.message_date_all);
-        SimpleDateFormat format=new SimpleDateFormat("dd-MMM-aaa");
+        SimpleDateFormat format=new SimpleDateFormat("dd-MMM-yyyy");
         if(position>0){
             Date before=new Date(messages.get(position-1).getDate());
             if(!format.format(before).equals(format.format(dat))){
