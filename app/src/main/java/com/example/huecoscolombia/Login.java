@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
 
 import com.example.huecoscolombia.Model.entity.Person;
 import com.example.huecoscolombia.Model.entity.Publication;
@@ -25,6 +27,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.example.huecoscolombia.services.NotiService;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
@@ -61,6 +64,8 @@ public class Login extends AppCompatActivity {
         signInButton = findViewById(R.id.sign_in_button);
         auth=FirebaseAuth.getInstance();
         db=FirebaseDatabase.getInstance();
+        Intent service=new Intent(this, NotiService.class);
+        startService(service);
         if(auth.getCurrentUser()!=null){
             if(auth.getCurrentUser().getEmail().contains("hotmail")){
                 startActivity(new Intent(this,AdminActivity.class));
@@ -85,6 +90,8 @@ public class Login extends AppCompatActivity {
                         startActivity(new Intent(this,TakePhoto.class));
                     }
                     finish();
+                }else {
+                    Toast.makeText(this,"Error al Iniciar sesion "+task.getException().getMessage(),Toast.LENGTH_LONG).show();
                 }
 
             });
