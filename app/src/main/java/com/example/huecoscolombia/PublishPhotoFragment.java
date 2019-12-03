@@ -77,17 +77,31 @@ public class PublishPhotoFragment extends Fragment implements TakePhotoFragment.
               Task<Uri> url=task.getResult().getStorage().getDownloadUrl();
               url.addOnCompleteListener(task1 -> {
                   Uri uri=url.getResult();
+                  String email = "";
+                  if(!Login.LOGIN_GOOGLE){
+                      email = auth.getCurrentUser().getEmail();
+                  } else {
+                      email = Login.emailGoogle;
+                  }
                   Publication publication=new Publication(
                           id,
                           uri.toString(),
                           direction.getText().toString(),
                           description.getText().toString(),
                           System.currentTimeMillis(),
-                          Publication.TO_DO,new ArrayList<>(),auth.getCurrentUser().getEmail().replace(".","_"));
+                          Publication.TO_DO,new ArrayList<>(),
+                          email.replace(".","_"));
 
-                  db.getReference().child(Publication.BRANCH).child(Publication.TO_DO)
-                          .child(auth.getCurrentUser().getEmail().replace(".","_"))
-                          .child(id).setValue(publication);
+                  if(!Login.LOGIN_GOOGLE){
+                      db.getReference().child(Publication.BRANCH).child(Publication.TO_DO)
+                              .child(auth.getCurrentUser().getEmail().replace(".","_"))
+                              .child(id).setValue(publication);
+                  } else {
+                      db.getReference().child(Publication.BRANCH).child(Publication.TO_DO)
+                              .child(Login.emailGoogle.replace(".","_"))
+                              .child(id).setValue(publication);
+                  }
+
                   db.getReference().child(Publication.BRANCH).child(Publication.ALL)
                           .child(id).setValue(publication);
               });

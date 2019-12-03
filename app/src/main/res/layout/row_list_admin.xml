@@ -18,11 +18,11 @@
             android:layout_marginLeft="10dp"/>
     </LinearLayout>
 
-    <ImageButton
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:id="@+id/row_list_admin_message_btn"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"/>
+<!--    <ImageButton-->
+<!--        android:layout_width="60dp"-->
+<!--        android:layout_height="60dp"-->
+<!--        android:id="@+id/row_list_admin_message_btn"-->
+<!--        android:layout_alignParentRight="true"-->
+<!--        android:layout_marginRight="10dp"-->
+<!--        android:layout_marginTop="10dp"/>-->
 </RelativeLayout>

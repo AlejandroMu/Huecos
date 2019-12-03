@@ -1,5 +1,6 @@
 package com.example.huecoscolombia;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
@@ -18,6 +19,8 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import com.example.huecoscolombia.app.HuecosColombiaApp;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.io.File;
@@ -78,10 +81,19 @@ public class TakePhoto extends AppCompatActivity implements View.OnClickListener
         info.setOnClickListener(this);
         logout.setOnClickListener(
                 view -> {
-                    auth.signOut();
-                    Intent intent = new Intent(this, Login.class);
-                    startActivity(intent);
-                    finish();
+                    if(!Login.LOGIN_GOOGLE){
+                        auth.signOut();
+                        Intent intent = new Intent(this, Login.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Log.e("log", "si esta logeado");
+                        signOut();
+                        Intent intent = new Intent(this, Login.class);
+                        startActivity(intent);
+                        finish();
+                    }
+
                 }
         );
 
@@ -176,5 +188,15 @@ public class TakePhoto extends AppCompatActivity implements View.OnClickListener
     @Override
     public void onBackPressed() {
 
+    }
+
+    public void signOut() {
+        Login.mGoogleSignInClient.signOut()
+                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        // ...
+                    }
+                });
     }
 }
