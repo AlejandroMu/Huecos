@@ -18,13 +18,15 @@ import com.google.firebase.database.FirebaseDatabase;
 
 
 
-public class NotiService extends Service {
+public class NotiService extends Service{
 
     FirebaseDatabase db;
     FirebaseAuth auth;
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        Log.e("noti","onStartCommand");
+
         db = FirebaseDatabase.getInstance();
         auth = FirebaseAuth.getInstance();
         db.getReference().child("notificaciones")
@@ -75,6 +77,8 @@ public class NotiService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
+        Log.e("noti","onBind");
+
         return null;
     }
 }
