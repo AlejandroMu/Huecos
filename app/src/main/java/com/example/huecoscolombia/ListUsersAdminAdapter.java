@@ -78,7 +78,8 @@ public class ListUsersAdminAdapter extends BaseAdapter {
                 Person aux = persons.get(i);
                 Intent intent = new Intent(HuecosColombiaApp.getContext(),MessageActivity.class);
                 intent.putExtra("user",aux);
-                intent.putExtra("state","admin");
+
+                intent.putExtra("dest",aux.getEmail());
                 HuecosColombiaApp.getContext().startActivity(intent);
             }
         });

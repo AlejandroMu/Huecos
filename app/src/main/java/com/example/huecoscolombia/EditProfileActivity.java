@@ -101,6 +101,7 @@ public class EditProfileActivity extends AppCompatActivity {
                         if(pas.equals(user.getPassword())){
                             if(newP.equals(coP)){
                                 user.setPassword(newP);
+
                                 db.getReference().child(User.BRANCH).child(id).setValue(user);
 
                                 EditProfileActivity.super.onBackPressed();

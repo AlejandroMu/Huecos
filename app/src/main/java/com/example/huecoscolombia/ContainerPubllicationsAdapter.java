@@ -115,6 +115,7 @@ public class ContainerPubllicationsAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(HuecosColombiaApp.getContext(), MessageActivity.class);
+                intent.putExtra("dest",object.getUser());
                 HuecosColombiaApp.getContext().startActivity(intent);
             }
         });

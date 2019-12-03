@@ -74,25 +74,28 @@ public class MessageActivity extends AppCompatActivity {
                 }
         );
         ClientRest clientRest=new ClientRest();
-        clientRest.getMessage(auth.getCurrentUser().getEmail().replace(".","_"),userDestId,(list)->{
+        String userId=auth.getCurrentUser().getEmail().replace(".","_");
+        String tmp=userId.contains("hotmail")?Role.ADMIN.toString():userId;
+
+        clientRest.getMessage(tmp,userDestId,(list)->{
             runOnUiThread(()->{
                 adapter.setList(list);
             });
         });
-        String userId=auth.getCurrentUser().getEmail().replace(".","_");
-
         send.setOnClickListener(v->{
             String msm=message.getText().toString();
             if(!msm.isEmpty()){
+
                 String id= UUID.randomUUID().toString();
                 Message newMessage=new Message(id,auth.getCurrentUser().getEmail(),msm,System.currentTimeMillis());
-                db.getReference().child(Message.BRANCH).child(userDestId).child(userId).child(id).setValue(newMessage);
-                db.getReference().child(Message.BRANCH).child(userId).child(userDestId).child(id).setValue(newMessage);
-                db.getReference().child("notificaciones").child(userId).child(id).setValue(newMessage);
+                db.getReference().child(Message.BRANCH).child(userDestId).child(tmp).child(id).setValue(newMessage);
+                db.getReference().child(Message.BRANCH).child(tmp).child(userDestId).child(id).setValue(newMessage);
+                db.getReference().child("notificaciones").child(userDestId).child(id).setValue(newMessage);
                 message.setText("");
              }
         });
-        db.getReference().child(Message.BRANCH).child(userId).child(userDestId)
+
+        db.getReference().child(Message.BRANCH).child(tmp).child(userDestId)
                 .addChildEventListener(new ChildEventListener() {
                     @Override
                     public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
