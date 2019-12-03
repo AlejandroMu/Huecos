@@ -19,6 +19,8 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import com.example.huecoscolombia.app.HuecosColombiaApp;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -81,19 +83,15 @@ public class TakePhoto extends AppCompatActivity implements View.OnClickListener
         info.setOnClickListener(this);
         logout.setOnClickListener(
                 view -> {
-                    if(!Login.LOGIN_GOOGLE){
                         auth.signOut();
+                        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+                        if(account!=null){
+                            signOut();
+                            Log.e("logoutgoogle", "salio de  google");
+                        }
                         Intent intent = new Intent(this, Login.class);
                         startActivity(intent);
                         finish();
-                    } else {
-                        Log.e("log", "si esta logeado");
-                        signOut();
-                        Intent intent = new Intent(this, Login.class);
-                        startActivity(intent);
-                        finish();
-                    }
-
                 }
         );
 

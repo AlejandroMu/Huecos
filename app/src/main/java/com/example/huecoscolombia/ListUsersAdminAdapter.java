@@ -54,7 +54,7 @@ public class ListUsersAdminAdapter extends BaseAdapter {
         TextView name = v.findViewById(R.id.row_list_users_admin_name_tv);
         ImageButton deleteUser = v.findViewById(R.id.row_list_users_admin_delete_btn);
         ImageButton editUser = v.findViewById(R.id.row_list_users_admin_edit_btn);
-        ImageButton lockUser = v.findViewById(R.id.row_list_users_admin_lock_btn);
+        ImageButton messageUser = v.findViewById(R.id.row_list_users_admin_message_btn);
 
         name.setText(persons.get(i).getName());
 
@@ -72,10 +72,14 @@ public class ListUsersAdminAdapter extends BaseAdapter {
                 HuecosColombiaApp.getContext().startActivity(intent);
             }
         });
-        lockUser.setOnClickListener(new View.OnClickListener() {
+        messageUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Person aux = persons.get(i);
+                Intent intent = new Intent(HuecosColombiaApp.getContext(),MessageActivity.class);
+                intent.putExtra("user",aux);
+                intent.putExtra("state","admin");
+                HuecosColombiaApp.getContext().startActivity(intent);
             }
         });
 

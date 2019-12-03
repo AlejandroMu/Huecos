@@ -46,21 +46,14 @@ public class MyNewsActivity extends AppCompatActivity implements Response ,Value
                 }
         );
         clientRest=new ClientRest();
-        if(!Login.LOGIN_GOOGLE){
-            db.getReference().child(Publication.BRANCH).child(Publication.TO_DO).child(auth.getCurrentUser().getEmail().replace(".","_"))
-                    .addListenerForSingleValueEvent(this);
-            db.getReference().child(Publication.BRANCH).child(Publication.IN_PROGRESS).child(auth.getCurrentUser().getEmail().replace(".","_"))
-                    .addListenerForSingleValueEvent(this);
-            db.getReference().child(Publication.BRANCH).child(Publication.DONE).child(auth.getCurrentUser().getEmail().replace(".","_"))
-                    .addListenerForSingleValueEvent(this);
-        } else {
-            db.getReference().child(Publication.BRANCH).child(Publication.TO_DO).child(Login.emailGoogle.replace(".","_"))
-                    .addListenerForSingleValueEvent(this);
-            db.getReference().child(Publication.BRANCH).child(Publication.IN_PROGRESS).child(Login.emailGoogle.replace(".","_"))
-                    .addListenerForSingleValueEvent(this);
-            db.getReference().child(Publication.BRANCH).child(Publication.DONE).child(Login.emailGoogle.replace(".","_"))
-                    .addListenerForSingleValueEvent(this);
-        }
+
+        db.getReference().child(Publication.BRANCH).child(Publication.TO_DO).child(auth.getCurrentUser().getEmail().replace(".","_"))
+                .addListenerForSingleValueEvent(this);
+        db.getReference().child(Publication.BRANCH).child(Publication.IN_PROGRESS).child(auth.getCurrentUser().getEmail().replace(".","_"))
+                .addListenerForSingleValueEvent(this);
+        db.getReference().child(Publication.BRANCH).child(Publication.DONE).child(auth.getCurrentUser().getEmail().replace(".","_"))
+                .addListenerForSingleValueEvent(this);
+
 
 
 

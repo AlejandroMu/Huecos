@@ -16,27 +16,27 @@
             android:layout_marginLeft="10dp"/>
     </LinearLayout>
     <ImageButton
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:id="@+id/row_list_users_admin_lock_btn"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:id="@+id/row_list_users_admin_message_btn"
         android:layout_alignParentRight="true"
         android:layout_marginRight="75dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/locked"/>
+        android:layout_marginTop="20dp"
+        android:background="@drawable/messages_acent"/>
     <ImageButton
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
         android:id="@+id/row_list_users_admin_edit_btn"
         android:layout_alignParentRight="true"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/edit"/>
+        android:layout_marginTop="20dp"
+        android:background="@drawable/edit" />
     <ImageButton
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
         android:id="@+id/row_list_users_admin_delete_btn"
         android:layout_alignParentRight="true"
         android:layout_marginRight="140dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/clear"/>
 </RelativeLayout>
