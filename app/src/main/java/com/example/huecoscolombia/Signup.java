@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.example.huecoscolombia.Model.entity.Person;
 import com.example.huecoscolombia.Model.entity.Role;
@@ -81,6 +82,8 @@ public class Signup extends AppCompatActivity {
                         }
                     }
                 });
+            }else{
+                Toast.makeText(this,"Las contraseñas no coinciden",Toast.LENGTH_LONG).show();
             }
 
         });

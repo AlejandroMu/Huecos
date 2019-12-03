@@ -41,7 +41,7 @@ public class MessageActivity extends AppCompatActivity {
     private ListView messages;
     private EditText message;
     private MessageAdapter adapter;
-
+    private String userDestId;
     FirebaseDatabase db;
     FirebaseAuth auth;
 
@@ -53,6 +53,7 @@ public class MessageActivity extends AppCompatActivity {
         db=FirebaseDatabase.getInstance();
         auth=FirebaseAuth.getInstance();
         adapter=new MessageAdapter();
+        userDestId=getIntent().getExtras().getString("dest").replace(".","_");
 
         send=findViewById(R.id.message_send_btn);
         messages=findViewById(R.id.list_message);
@@ -66,24 +67,24 @@ public class MessageActivity extends AppCompatActivity {
                 }
         );
         ClientRest clientRest=new ClientRest();
-        clientRest.getMessage(auth.getCurrentUser().getEmail().replace(".","_"),(list)->{
+        clientRest.getMessage(auth.getCurrentUser().getEmail().replace(".","_"),userDestId,(list)->{
             runOnUiThread(()->{
                 adapter.setList(list);
             });
         });
+        String userId=auth.getCurrentUser().getEmail().replace(".","_");
 
         send.setOnClickListener(v->{
             String msm=message.getText().toString();
             if(!msm.isEmpty()){
                 String id= UUID.randomUUID().toString();
-                String userId=auth.getCurrentUser().getEmail();
-                Message newMessage=new Message(id,userId,msm,System.currentTimeMillis());
-                db.getReference().child(Message.BRANCH).child(Role.ADMIN.toString()).child(id).setValue(newMessage);
-                db.getReference().child(Message.BRANCH).child(userId.replace(".","_")).child(id).setValue(newMessage);
+                Message newMessage=new Message(id,auth.getCurrentUser().getEmail(),msm,System.currentTimeMillis());
+                db.getReference().child(Message.BRANCH).child(userDestId).child(userId).child(id).setValue(newMessage);
+                db.getReference().child(Message.BRANCH).child(userId).child(userDestId).child(id).setValue(newMessage);
                 message.setText("");
              }
         });
-        db.getReference().child(Message.BRANCH).child(auth.getCurrentUser().getEmail().replace(".","_"))
+        db.getReference().child(Message.BRANCH).child(userId).child(userDestId)
                 .addChildEventListener(new ChildEventListener() {
                     @Override
                     public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {

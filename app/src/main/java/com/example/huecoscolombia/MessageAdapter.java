@@ -1,6 +1,7 @@
 package com.example.huecoscolombia;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +48,7 @@ public class MessageAdapter extends BaseAdapter {
         Message tmp=messages.get(position);
         TextView ms=null;
         TextView date=null;
+        Date dat=new Date(tmp.getDate());
         if(auth.getCurrentUser().getEmail().equals(tmp.getWriter())) {
             ms = v.findViewById(R.id.message_show_tv_right);
             date = v.findViewById(R.id.message_date_tv_right);
@@ -54,10 +56,24 @@ public class MessageAdapter extends BaseAdapter {
             ms = v.findViewById(R.id.message_show_tv);
             date = v.findViewById(R.id.message_date_tv);
         }
+        TextView dateA=v.findViewById(R.id.message_date_all);
+        SimpleDateFormat format=new SimpleDateFormat("dd-MMM-aaa");
+        if(position>0){
+            Date before=new Date(messages.get(position-1).getDate());
+            if(!format.format(before).equals(format.format(dat))){
+                dateA.setText(format.format(dat));
+                dateA.setVisibility(View.VISIBLE);
+            }
+
+        }else{
+            dateA.setText(format.format(dat));
+            dateA.setVisibility(View.VISIBLE);
+
+        }
         ms.setVisibility(View.VISIBLE);
         date.setVisibility(View.VISIBLE);
-        SimpleDateFormat format=new SimpleDateFormat("dd-MM-yy HH:mm");
-        String dateF=format.format(new Date(tmp.getDate()));
+        SimpleDateFormat hours=new SimpleDateFormat("HH:mm a");
+        String dateF=hours.format(dat);
         ms.setText(tmp.getMessage());
         date.setText(dateF);
 
