@@ -5,8 +5,17 @@ import android.graphics.Bitmap;
 import com.example.huecoscolombia.Model.driver.Id;
 
 import java.util.Date;
+import java.util.List;
 
 public class Publication {
+    public static final String URL="https://us-central1-huecos-colombia-114c0.cloudfunctions.net/functions/publications";
+    public static final String BRANCH="publications";
+
+    public static final String IN_PROGRESS="IN_PROGRESS";
+    public static final String TO_DO="TO_DO";
+    public static final String DONE="DONE";
+    public static final String ALL="ALL";
+
 
     @Id
     private String id;
@@ -15,8 +24,99 @@ public class Publication {
     private String pathImage;
     private String location;
     private String description;
-    private Date date;
-    private State state;
-    private int likes;
+    private String user;
+    private long date;
+    private String state;
+    private List<String> likes;
 
+    public Publication(){
+
+    }
+
+    public Publication(String id,String pathImage, String location, String description, long date, String state, List<String> likes,String user) {
+        this.id = id;
+        this.pathImage = pathImage;
+        this.location = location;
+        this.description = description;
+        this.date = date;
+        this.state = state;
+        this.likes = likes;
+        this.user=user;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Bitmap getImage() {
+        return image;
+    }
+
+    public void setImage(Bitmap image) {
+        this.image = image;
+    }
+
+    public String getPathImage() {
+        return pathImage;
+    }
+
+    public void setPathImage(String pathImage) {
+        this.pathImage = pathImage;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public long getDate() {
+        return date;
+    }
+
+    public void setDate(long date) {
+        this.date = date;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public List<String> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(List<String> likes) {
+        this.likes = likes;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public void addLike(String us){
+        likes.add(us);
+    }
 }

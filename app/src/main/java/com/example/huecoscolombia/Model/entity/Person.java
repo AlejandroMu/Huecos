@@ -4,17 +4,39 @@ import com.example.huecoscolombia.Model.driver.Colum;
 import com.example.huecoscolombia.Model.driver.Id;
 import com.example.huecoscolombia.Model.driver.Table;
 
-import java.util.List;
-
 @Table(name = "PERSON")
 public class Person {
+    public static final String BRANCH="persons";
+
 
     @Id
-    private String cc;
-    private User user;
-    @Colum()
-    private String name;
     private String email;
-    private List<Publication> publicationsDone;
+    @Colum(name = "name")
+    private String name;
+    private String username;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
 }

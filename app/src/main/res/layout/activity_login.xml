@@ -2,7 +2,7 @@
 <RelativeLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@drawable/backgroundLogin">
+    android:background="@drawable/background_login">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,10 +22,12 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:background="@drawable/round_edge"
+            android:textColor="#000"
             android:textSize="25sp"
             android:padding="10dp"
             android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp"/>
+            android:layout_marginBottom="15dp"
+            android:textColorHint="#757575"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -36,8 +38,10 @@
             android:background="@drawable/round_edge"
             android:textSize="25sp"
             android:padding="10dp"
+            android:textColor="#000"
             android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp"/>
+            android:layout_marginBottom="15dp"
+            android:textColorHint="#757575"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -47,7 +51,7 @@
             android:textSize="25sp"
             android:id="@+id/login_register_tv"
             android:layout_marginBottom="15dp"
-            android:textColor="#FFF"/>
+            android:textColor="#FFF" />
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">

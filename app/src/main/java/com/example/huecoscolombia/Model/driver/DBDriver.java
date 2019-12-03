@@ -6,7 +6,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.huecoscolombia.Model.entity.User;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 
 public class DBDriver extends SQLiteOpenHelper {
