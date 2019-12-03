@@ -25,7 +25,7 @@ import java.util.UUID;
 
 public class TakePhoto extends AppCompatActivity implements View.OnClickListener{
 
-    private ImageButton profile, camera, news, info;
+    private ImageButton profile, camera, news, info, logout;
     private LinearLayout container, profileLl, photoLl, newsLl, infoLl;
 
     private TakePhotoFragment takePhotoFragment;
@@ -33,6 +33,8 @@ public class TakePhoto extends AppCompatActivity implements View.OnClickListener
     private NewsFragment newsFragment;
     private InfoFragment infoFragment;
     private PublishPhotoFragment publishPhotoFragment;
+
+    FirebaseAuth auth;
 
 
     public static final int PRIMARY_COLOR=R.color.colorPrimary;
@@ -42,6 +44,8 @@ public class TakePhoto extends AppCompatActivity implements View.OnClickListener
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_take_photo);
+
+        auth = FirebaseAuth.getInstance();
 
         ActivityCompat.requestPermissions(this, new String[]{
                 Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -66,11 +70,20 @@ public class TakePhoto extends AppCompatActivity implements View.OnClickListener
         photoLl = findViewById(R.id.take_photo_photo_ll);
         newsLl = findViewById(R.id.take_photo_news_ll);
         infoLl = findViewById(R.id.take_photo_info_ll);
+        logout = findViewById(R.id.take_photo_logout_btn);
 
         profile.setOnClickListener(this);
         camera.setOnClickListener(this);
         news.setOnClickListener(this);
         info.setOnClickListener(this);
+        logout.setOnClickListener(
+                view -> {
+                    auth.signOut();
+                    Intent intent = new Intent(this, Login.class);
+                    startActivity(intent);
+                    finish();
+                }
+        );
 
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction ft = manager.beginTransaction();
@@ -158,5 +171,10 @@ public class TakePhoto extends AppCompatActivity implements View.OnClickListener
         FragmentTransaction ft = manager.beginTransaction();
         ft.replace(R.id.take_photo_container_ll, takePhotoFragment);
         ft.commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+
     }
 }

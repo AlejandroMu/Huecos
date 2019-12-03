@@ -12,7 +12,8 @@
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:id="@+id/fr_profile_picture_img"
-            android:layout_marginTop="20dp"/>
+            android:layout_marginTop="20dp"
+            android:background="@drawable/avatar"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
 import androidx.core.content.FileProvider;
@@ -30,6 +31,7 @@ public class TakePhotoFragment extends Fragment {
     private ImageButton takePhoto, gallery;
     private File photoFile;
     private String id;
+
 
     private static final int CAMERA_CALLBACK_ID = 11;
     private static final int GALLERY_CALLBACK_ID = 12;

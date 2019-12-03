@@ -4,8 +4,10 @@ import com.example.huecoscolombia.Model.driver.Colum;
 import com.example.huecoscolombia.Model.driver.Id;
 import com.example.huecoscolombia.Model.driver.Table;
 
+import java.io.Serializable;
+
 @Table(name = "PERSON")
-public class Person {
+public class Person implements Serializable {
     public static final String BRANCH="persons";
 
 

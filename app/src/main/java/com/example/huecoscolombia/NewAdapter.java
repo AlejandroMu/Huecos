@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 
@@ -58,9 +59,23 @@ public class NewAdapter extends BaseAdapter {
         ImageView picture = v.findViewById(R.id.row_new_picture_img);
         ImageView check = v.findViewById(R.id.row_new_check_img);
         ImageButton like = v.findViewById(R.id.row_new_like_btn);
+        Publication aux = news.get(i);
+        if(aux.getLikes()!=null){
+            if(aux.getLikes().contains(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
+                like.setBackgroundResource(R.drawable.star_for_like);
+            }
+        }
+        if(aux.getState().equals(Publication.TO_DO)){
+            check.setBackgroundResource(R.drawable.check_request);
+        } else if(aux.getState().equals(Publication.IN_PROGRESS)) {
+            check.setBackgroundResource(R.drawable.checked_process);
+        } else {
+            check.setBackgroundResource(R.drawable.checked_succes);
+        }
         TextView numLike = v.findViewById(R.id.row_new_num_like_tv);
         TextView date = v.findViewById(R.id.row_new_date_tv);
         TextView description = v.findViewById(R.id.row_new_description_tv);
+        TextView direction = v.findViewById(R.id.row_new_direction_tv);
         Publication object=news.get(i);
         picture.setImageBitmap(object.getImage());
         int likes=object.getLikes()!=null?object.getLikes().size():0;
@@ -69,12 +84,13 @@ public class NewAdapter extends BaseAdapter {
 
         date.setText(format.format(new Date(object.getDate())));
         description.setText(object.getDescription());
+        direction.setText(object.getLocation());
 
         like.setOnClickListener((v1)->{
 
             rest.addLike(object, FirebaseAuth.getInstance().getCurrentUser().getEmail(),res );
+            like.setBackgroundResource(R.drawable.star_for_like);
         });
-
         return v;
     }
     public void setList(LinkedList<Publication> images){

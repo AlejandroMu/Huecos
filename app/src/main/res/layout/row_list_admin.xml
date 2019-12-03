@@ -14,20 +14,14 @@
             android:id="@+id/row_list_admin_name_tv"
             android:text="holshols"
             android:layout_gravity="center_vertical"
-            android:layout_marginRight="140dp"
+            android:layout_marginRight="80dp"
             android:layout_marginLeft="10dp"/>
     </LinearLayout>
+
     <ImageButton
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:id="@+id/row_list_admin_message_btn"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="75dp"
-        android:layout_marginTop="10dp"/>
-    <ImageButton
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:id="@+id/row_list_admin_check_btn"
         android:layout_alignParentRight="true"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"/>

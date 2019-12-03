@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 
+import com.example.huecoscolombia.Model.entity.Message;
 import com.example.huecoscolombia.Model.entity.Publication;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -13,6 +14,7 @@ import java.lang.reflect.Type;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.LinkedList;
+import java.util.List;
 
 public class ClientRest {
 
@@ -89,15 +91,39 @@ public class ClientRest {
 
             }catch (Exception e){
                 Log.e("likes","exception : "+e.getMessage());
-
             }
-
         }).start();
-
     }
 
-    public void getObject(){
+    public void changeState(Publication p, String state, Response response) {
+        String body = "/state?pub="+p.getId()+"&state="+state;
+        new Thread(()->{
+            try {
+                HTTPSWebUtilDomi utilDomi=new HTTPSWebUtilDomi();
+                String res=utilDomi.GETrequest(Publication.URL+body);
+                Gson gson=new Gson();
+                Publication resp=gson.fromJson(res,Publication.class);
+                response.responsePublication(p,resp);
 
+            }catch (Exception e){
+                Log.e("likes","exception : "+e.getMessage());
+            }
+        }).start();
+    }
+
+    public void getMessage(String user, MessageResponse messageResponse){
+        new Thread(()->{
+            try {
+                HTTPSWebUtilDomi utilDomi=new HTTPSWebUtilDomi();
+                String msms=utilDomi.GETrequest(Message.URL+"?user="+user);
+                Gson gson=new Gson();
+                Type type=new TypeToken<List<Message>>(){}.getType();
+                List<Message> list=gson.fromJson(msms,type);
+                messageResponse.changeList(list);
+            }catch (Exception e){
+
+            }
+        }).start();
     }
 
 }
