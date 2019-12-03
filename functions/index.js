@@ -108,4 +108,22 @@ app.get('/publications/state',(req,res)=>{
 	});
 });
 
+app.get('/messages',(req,res)=>{
+	var user=req.query.user;
+	var msms=[];
+	admin.database().ref().child("messages").child(user)
+	.once('value',snap=>{
+		snap.forEach(item=>{
+			msms.push(item.val());
+		});
+		msms.sort((a,b)=>{
+			return a.date-b.date;
+		});
+		res.send(msms);
+		
+	});
+
+
+});
+
 exports.functions = functions.https.onRequest(app);

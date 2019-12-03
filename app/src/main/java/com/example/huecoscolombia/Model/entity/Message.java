@@ -7,6 +7,7 @@ import com.example.huecoscolombia.Model.driver.Id;
 import java.util.Date;
 
 public class Message {
+    public static final String URL="https://us-central1-huecos-colombia-114c0.cloudfunctions.net/functions/messages";
     public static final String BRANCH="messages";
 
     @Id
@@ -15,6 +16,10 @@ public class Message {
     @Colum(name = "message")
     private String message;
     private long date;
+
+    public Message(){
+
+    }
 
     public Message(String id, String writer, String message, long date) {
         this.id = id;
