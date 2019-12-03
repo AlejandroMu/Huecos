@@ -111,11 +111,11 @@ public class ClientRest {
         }).start();
     }
 
-    public void getMessage(String user, MessageResponse messageResponse){
+    public void getMessage(String user, String dest,MessageResponse messageResponse){
         new Thread(()->{
             try {
                 HTTPSWebUtilDomi utilDomi=new HTTPSWebUtilDomi();
-                String msms=utilDomi.GETrequest(Message.URL+"?user="+user);
+                String msms=utilDomi.GETrequest(Message.URL+"?user="+user+"&dest="+dest);
                 Gson gson=new Gson();
                 Type type=new TypeToken<List<Message>>(){}.getType();
                 List<Message> list=gson.fromJson(msms,type);

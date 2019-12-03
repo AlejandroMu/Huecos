@@ -110,8 +110,9 @@ app.get('/publications/state',(req,res)=>{
 
 app.get('/messages',(req,res)=>{
 	var user=req.query.user;
+	var userDest=req.query.dest;
 	var msms=[];
-	admin.database().ref().child("messages").child(user)
+	admin.database().ref().child("messages").child(user).child(userDest)
 	.once('value',snap=>{
 		snap.forEach(item=>{
 			msms.push(item.val());

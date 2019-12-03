@@ -17,6 +17,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.huecoscolombia.Model.entity.Person;
+import com.example.huecoscolombia.Model.entity.Role;
+import com.example.huecoscolombia.Model.entity.User;
 import com.example.huecoscolombia.app.HuecosColombiaApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -50,30 +52,22 @@ public class ProfileFragment extends Fragment {
         name = view.findViewById(R.id.fr_profile_name_tv);
         getCurrentUser();
         messages.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent intent = new Intent(view.getContext(), MessageActivity.class);
-                        startActivity(intent);
-                    }
+                view1 -> {
+                    Intent intent = new Intent(view1.getContext(), MessageActivity.class);
+                    intent.putExtra("dest", Role.ADMIN.toString());
+                    startActivity(intent);
                 }
         );
         editProfile.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent intent = new Intent(view.getContext(), EditProfileActivity.class);
-                        startActivity(intent);
-                    }
+                view12 -> {
+                    Intent intent = new Intent(view12.getContext(), EditProfileActivity.class);
+                    startActivity(intent);
                 }
         );
         photos.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent intent = new Intent(view.getContext(), MyNewsActivity.class);
-                        startActivity(intent);
-                    }
+                view13 -> {
+                    Intent intent = new Intent(view13.getContext(), MyNewsActivity.class);
+                    startActivity(intent);
                 }
         );
         return view;
